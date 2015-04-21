@@ -1,0 +1,5 @@
+*.backup
+*.tfplan
+*.tfvars
+.terraform/
+crash.log
