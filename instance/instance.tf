@@ -14,7 +14,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_security_group" "ssh" {
-  name = "ssh"
+  name = "instance-ssh"
   description = "Allow SSH from anywhere"
 
   ingress {
@@ -26,7 +26,7 @@ resource "aws_security_group" "ssh" {
 }
 
 resource "aws_security_group" "web" {
-  name = "web"
+  name = "instance-web"
   description = "Allow HTTP and HTTPS from anywhere"
 
   ingress {
