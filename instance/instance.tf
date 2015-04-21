@@ -10,7 +10,14 @@ resource "aws_instance" "web" {
   key_name = "justincampbell"
   security_groups = ["${aws_security_group.ssh.name}", "${aws_security_group.web.name}"]
 
-  user_data = "${file("../setup-httpd.sh")}"
+  provisioner "remote-exec" {
+    script = "setup-httpd.sh"
+
+    connection {
+        agent = true
+        user = "ec2-user"
+    }
+  }
 }
 
 resource "aws_security_group" "ssh" {

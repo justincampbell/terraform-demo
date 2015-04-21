@@ -28,7 +28,7 @@ resource "aws_launch_configuration" "web" {
   instance_type = "m3.medium"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.web.name}"]
-  user_data = "${file("../setup-httpd.sh")}"
+  user_data = "${file("setup-httpd.sh")}"
 
   lifecycle { create_before_destroy = true }
 }
