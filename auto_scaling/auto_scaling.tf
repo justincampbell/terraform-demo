@@ -19,15 +19,18 @@ resource "aws_autoscaling_group" "web" {
 
   min_size = 2
   max_size = 10
+  desired_capacity = "${var.desired_capacity}"
 }
 
 resource "aws_launch_configuration" "web" {
   image_id = "ami-1ecae776"
-  instance_type = "${var.aws_instance_type}"
+  /* image_id = "ami-28cae740" */
+  instance_type = "m3.medium"
   key_name = "${var.aws_key_name}"
-  name = "${var.app_name}"
   security_groups = ["${aws_security_group.web.name}"]
   user_data = "${file("setup-httpd.sh")}"
+
+  lifecycle { create_before_destroy = true }
 }
 
 resource "aws_elb" "web" {
